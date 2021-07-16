@@ -21,9 +21,16 @@ public class Main {
 
 
         System.out.println(bt.getBase());
+        bt.updateArrayList();
+        System.out.println(bt.getLevel(1));
         System.out.println(bt.getLevel(2));
+        System.out.println(bt.getLevel(3));
+//        System.out.println(bt.getLevel(4));
+
+
     }
-    //LinkedList Reverse
+
+
     public static LinkedList<Object> reverse_ll(LinkedList<Object> data){
         LinkedList<Object> new_data = new LinkedList();
         for (int i = data.size()-1; i >= 0; i--) {
@@ -35,6 +42,7 @@ public class Main {
 }
 
 class Node{
+
     private int value;
     private Node Left;
     private Node Right;
@@ -42,9 +50,6 @@ class Node{
     public Node(int value) {
         this.value = value;
     }
-
-
-    public Node(){}
 
     public int getValue() {
         return value;
@@ -93,7 +98,9 @@ class Tree{
         }
     }
 
+
     void updateArrayList(){
+        data.removeAll(data);
         int levels =findLevel(max,getBase());
         for (int i = 0; i < levels+1; i++) {
             data.add(new ArrayList<>());
@@ -101,7 +108,7 @@ class Tree{
         for (int i = 0; i <= max; i++) {
             data.get(findLevel(i, this.getBase())).add(i);
         }
-        System.out.println(data);
+//        System.out.println(data);
     }
 
 
@@ -136,14 +143,14 @@ class Tree{
         if (node.getValue() == Value)
             return level;
 
-        int GoDown = FindLevelRecursive(node.getLeft(), Value, level + 1);
+        int Lower = FindLevelRecursive(node.getLeft(), Value, level + 1);
 
-        if (GoDown != 0) {
-            return GoDown;
+        if (Lower != 0) {
+            return Lower;
         }
 
-        GoDown = FindLevelRecursive(node.getRight(), Value, level + 1);
-        return GoDown;
+        Lower = FindLevelRecursive(node.getRight(), Value, level + 1);
+        return Lower;
     }
 
 
